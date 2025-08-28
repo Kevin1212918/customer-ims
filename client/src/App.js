@@ -12,15 +12,10 @@ const Page = {
 
 function App() {
     const [curPage, setCurPage] = useState(Page.GET_CUSTOMERS);
-    const [banner, setBanner] = useState("");
-    function setBannerWithTimeout(banner) {
-        
-    }
     return (
         <div className="App">
             <Navbar setCurPage={setCurPage} /> 
-            <Body curPage={curPage} />
-            <Banner banner={banner}/>
+            <Body curPage={curPage}/>
         </div>
     );
 }
@@ -30,11 +25,11 @@ function Navbar(props) {
         props.setCurPage(page);
     };}
     return (
-        <div>
+        <nav>
             <button onClick={onClick(Page.GET_CUSTOMERS)}>Show customers</button>
             <button onClick={onClick(Page.CREATE_CUSTOMER)}>Create a customer</button>
             <button onClick={onClick(Page.GET_CUSTOMER)}>Find a customer</button>
-        </div>
+        </nav>
     );
 }
 
@@ -50,13 +45,6 @@ function Body(props) {
             console.log(`Invalid page: ${props.curPage}`)
             return <div>error</div>
     }
-}
-
-function Banner(props) {
-    return (
-        <div>{props.banner}</div>
-    )
-
 }
 
 export default App;
