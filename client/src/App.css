@@ -1,0 +1,209 @@
+/* ===== Simple CSS Starter ===== */
+
+/* 1) Variables & base reset */
+:root{
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --muted: #6b7280;
+  --primary: #2563eb;
+  --primary-contrast: #ffffff;
+  --surface: #f8fafc;
+  --border: #e5e7eb;
+  --radius: 12px;
+  --shadow: 0 6px 20px rgba(0,0,0,.06);
+  --maxw: 960px;
+  --space: 1rem;
+  --font: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body{
+  margin: 0;
+  font-family: var(--font);
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
+
+/* 2) Typography */
+h1, h2, h3, h4 { line-height: 1.2; margin: 0 0 .5em; }
+h1 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
+h2 { font-size: clamp(1.4rem, 2.2vw, 1.8rem); }
+h3 { font-size: 1.2rem; }
+p  { margin: 0 0 1em; color: var(--text); }
+small { color: var(--muted); }
+
+/* 3) Layout helpers */
+.container{
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section{
+  padding: clamp(2rem, 4vw, 3rem) 0;
+}
+
+.grid{
+  display: grid;
+  gap: 1rem;
+}
+.grid-2{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-3{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (max-width: 720px){
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* 4) Card */
+.card{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+
+/* 5) Buttons */
+.button{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .65rem 1rem;
+  border-radius: calc(var(--radius) - 4px);
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .02s ease, box-shadow .2s ease, background .2s ease;
+}
+.button:hover { box-shadow: var(--shadow); }
+.button:active { transform: translateY(1px); }
+
+.button.primary{
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border-color: transparent;
+}
+.button.ghost{
+  background: transparent;
+}
+
+/* 6) Forms */
+input, select, textarea{
+  width: 100%;
+  padding: .65rem .8rem;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 6px);
+  background: #fff;
+  color: var(--text);
+  outline: none;
+}
+input:focus, select:focus, textarea:focus{
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 20%, transparent);
+}
+
+/* 7) Nav (optional) */
+.nav{
+  display: flex;
+  gap: .75rem;
+  padding: .75rem 0;
+}
+.nav a{
+  color: var(--muted);
+  text-decoration: none;
+  padding: .35rem .6rem;
+  border-radius: 8px;
+}
+.nav a[aria-current="page"],
+.nav a:hover{ background: var(--surface); color: var(--text); }
+
+/* 8) Utilities */
+.center { display: grid; place-items: center; }
+.stack > * + * { margin-top: var(--space); }
+.row { display: flex; gap: var(--space); align-items: center; }
+.mt-0{ margin-top: 0 !important; }
+.mt-1{ margin-top: .5rem !important; }
+.mt-2{ margin-top: 1rem !important; }
+.mb-2{ margin-bottom: 1rem !important; }
+.p-2 { padding: 1rem !important; }
+.hidden { display: none !important; }
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans";
+  font-size: 0.95rem;
+  background: var(--surface, #f8fafc);
+  color: var(--text, #1a1a1a);
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 12px;
+  overflow: hidden; /* keeps rounded corners */
+  box-shadow: var(--shadow, 0 6px 20px rgba(0,0,0,.06));
+}
+
+/* Table Head */
+thead {
+  background: var(--primary, #2563eb);
+  color: var(--primary-contrast, #ffffff);
+  text-align: center;
+}
+
+thead th {
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+}
+
+/* Table Body */
+tbody tr {
+  transition: background 0.2s ease;
+}
+
+tbody tr:nth-child(even) {
+  background: var(--bg-alt, #f1f5f9);
+}
+
+tbody tr:hover {
+  background: var(--hover, #e0e7ff);
+}
+
+tbody td {
+  text-align: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+  color: var(--text, #1a1a1a);
+}
+
+/* Utility: striped or borderless variations */
+.table-striped tbody tr:nth-child(odd) {
+  background: var(--bg-alt, #f9fafb);
+}
+
+.table-borderless td,
+.table-borderless th {
+  border: none !important;
+}
+
+/* Responsive: make tables scrollable */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+}
+
+/* 9) Prefer-reduced-motion */
+@media (prefers-reduced-motion: reduce){
+  * { animation: none !important; transition: none !important; }
+}
