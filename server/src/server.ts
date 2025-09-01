@@ -1,31 +1,15 @@
-#!/usr/bin/env node
+import app from './app.js';
+import { createServer } from 'http';
+import Debug from 'debug';
+const debug = Debug("server:server");
 
-/**
- * Module dependencies.
- */
+import dotenv from 'dotenv';
+dotenv.config();
 
-var app = require('../app');
-var debug = require('debug')('server:server');
-var http = require('http');
-
-
-/**
- * Get port from environment and store in Express.
- */
-
-var port = normalizePort(process.env.PORT || '5433');
+const port = normalizePort(process.env.PORT || '5433');
 app.set('port', port);
 
-/**
- * Create HTTP server.
- */
-
-var server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
+var server = createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
@@ -34,7 +18,7 @@ server.on('listening', onListening);
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort(val) {
+function normalizePort(val: string) {
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -54,7 +38,7 @@ function normalizePort(val) {
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error) {
+function onError(error: any) {
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -84,6 +68,9 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
+  if (addr === null) {
+    return;
+  }
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;

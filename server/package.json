@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "build": "npx tsc",
+    "start": "node ./dist/server.js",
     "postinstall": "npx prisma generate"
   },
   "dependencies": {
@@ -12,10 +13,17 @@
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "tsx": "^4.20.5"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/debug": "^4.1.12",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.0",
     "prisma": "^6.15.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
-  }
+  },
+  "type": "module"
 }

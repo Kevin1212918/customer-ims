@@ -1,26 +1,23 @@
-const express = require('express');
-const logger = require('morgan');
-const cors = require('cors');
+import express = require('express');
+import cors = require('cors');
 
-const indexRouter = require('./routes/index');
-const apiRouter = require('./routes/api');
+import apiRouter from './routes/api.js';
 
 const app = express();
 
-const { 
-  CLIENT_PORT = 3000, 
-  CLIENT_HOST = 'localhost' 
+import dotenv from 'dotenv';
+dotenv.config();
+
+const {
+  CLIENT_PORT = 3000,
+  CLIENT_HOST = 'localhost'
 } = process.env;
 
-app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
 const allowedOrigins = [`http://${CLIENT_HOST}:${CLIENT_PORT}`];
-
 app.use(cors({
   origin: function (origin, callback) {
-
     if (!origin) return callback(null, true);
     if (allowedOrigins.indexOf(origin) === -1) {
       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
@@ -30,9 +27,6 @@ app.use(cors({
   }
 }));
 
-app.use('/', indexRouter);
 app.use('/api', apiRouter);
 
-module.exports = app;
-
-
+export default app;

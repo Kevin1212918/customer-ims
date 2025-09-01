@@ -1,5 +1,7 @@
-const db = require("./db.js");
-
+import prisma from "../../generated/prisma/client.js";
+import dotenv from 'dotenv';
+dotenv.config();
+const db = new prisma.PrismaClient();
 async function CreateCustomer(customer) {
     await db.customer.create({
         data: {
@@ -8,9 +10,8 @@ async function CreateCustomer(customer) {
             phone: customer.phone,
             address: customer.address,
         }
-    })
+    });
 }
-
 async function GetCustomers() {
     const customers = await db.customer.findMany({
         select: {
@@ -22,7 +23,6 @@ async function GetCustomers() {
     });
     return customers;
 }
-
 async function GetCustomer(id) {
     const customer = await db.customer.findUnique({
         where: {
@@ -31,9 +31,5 @@ async function GetCustomer(id) {
     });
     return customer;
 }
-
-module.exports = {
-    CreateCustomer,
-    GetCustomer,
-    GetCustomers,
-}
+export { CreateCustomer, GetCustomer, GetCustomers, };
+//# sourceMappingURL=customer.js.map
