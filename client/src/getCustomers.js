@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
+import { SERVER_API_URL } from './util';
 export default function GetCustomers() {
     const [customers, setCustomers] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5433/api/customers", {method: "GET"})
+        fetch(`${SERVER_API_URL}/customers`, {method: "GET"})
             .then(res => res.json())
             .then(
                 (result) => {

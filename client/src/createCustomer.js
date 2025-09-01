@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { SERVER_API_URL } from './util';
 export default function CreateCustomer() {
     async function submit(formData) {
-        fetch("http://localhost:5433/api/customers", {
+        fetch(`${SERVER_API_URL}/customers`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

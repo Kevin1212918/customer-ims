@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { SERVER_API_URL } from './util';
 export default function GetCustomer() {
     const [customer, setCustomer] = useState(null);
     if (customer === null) {
@@ -33,7 +34,7 @@ function SearchCustomer(props) {
         if (isNaN(id)) {
             return;
         }
-        fetch(`http://localhost:5433/api/customer/${id}`, {method: "GET"})
+        fetch(`${SERVER_API_URL}/customer/${id}`, {method: "GET"})
             .then(res => res.json())
             .then(
                 (result) => {
